@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hexa_project/route/routes.dart';
 import 'package:hexa_project/ui/screens/auth/account_type.dart';
 import 'package:hexa_project/ui/screens/auth/create_viewer_account.dart';
 import 'package:hexa_project/ui/screens/auth/create_visitor_account.dart';
@@ -11,8 +12,8 @@ import 'package:hexa_project/ui/screens/common_questions.dart';
 import 'package:hexa_project/ui/screens/contact_us.dart';
 import 'package:hexa_project/ui/screens/detailes.dart';
 import 'package:hexa_project/ui/screens/edit_account.dart';
-import 'package:hexa_project/ui/screens/exhibitors_screen.dart';
-import 'package:hexa_project/ui/screens/home_screen.dart';
+import 'package:hexa_project/ui/screens/exhibitors/exhibitors_screen.dart';
+import 'package:hexa_project/ui/screens/home/home_screen.dart';
 import 'package:hexa_project/ui/screens/map.dart';
 import 'package:hexa_project/ui/screens/organizers.dart';
 import 'package:hexa_project/ui/screens/personal_account.dart';
@@ -63,27 +64,27 @@ class MyApp extends StatelessWidget {
             // Set the initial locale
             // locale: const Locale('ar'), // English
             // Add your home screen or initial route
-            initialRoute: '/',
+            initialRoute: Routes.homeScreen,
             routes: {
-              '/': (context) => SplashScreen(),
-              '/home_screen': (context) => HomeScreen(),
-              '/login_screen': (context) => LoginScreen(),
-              '/account_type_screen': (context) => AccountType(),
-              '/visitor_register_screen': (context) => VisitorRegister(),
-              '/viewer_register_screen': (context) => ViewerRegister(),
-              '/personal_account_screen': (context) => PersonalProfile(),
-              '/blogs_screen': (context) => BlogsScreen(),
-              '/details_screen': (context) => DetailsScreen(),
-              '/contact_us_screen': (context) => ContactUsScreen(),
-              '/common_question_screen': (context) => CommonQuestionScreen(),
-              '/who_are_we_screen': (context) => WhoAreWeScreen(),
-              '/exhibitors_screen': (context) => ExhibitorsScreen(),
-              '/select_bouquet_screen': (context) => SelectBouquetScreen(),
-              '/map_screen': (context) => MapScreen(),
-              '/travel_and_hotel_screen': (context) => TravelAndHotelsScreen(),
-              '/organizers_screen': (context) => OrganizersScreen(),
-              '/tickets_screen': (context) => TicketsScreen(),
-              '/edit_account': (context) => EditAccountScreen(),
+              Routes.splashScreen: (context) => SplashScreen(),
+              Routes.homeScreen: (context) => HomeScreen(),
+              Routes.loginScreen: (context) => LoginScreen(),
+              Routes.accountTypeScreen: (context) => AccountTypeScreen(),
+              Routes.visitorRegisterScreen: (context) => VisitorRegister(),
+              Routes.viewerRegisterScreen: (context) => ViewerRegister(),
+              Routes.personalAccountScreen: (context) => PersonalProfile(),
+              Routes.blogsScreen: (context) => BlogsScreen(),
+              Routes.detailsScreen: (context) => DetailsScreen(),
+              Routes.contactUScreen: (context) => ContactUsScreen(),
+              Routes.commonQuestionScreen: (context) => CommonQuestionScreen(),
+              Routes.whoAreWeScreen: (context) => WhoAreWeScreen(),
+              Routes.exhibitorsScreen: (context) => ExhibitorsScreen(),
+              Routes.selectBouquetScreen: (context) => SelectBouquetScreen(),
+              Routes.mapScreen: (context) => MapScreen(),
+              Routes.travelAndHotelScreen: (context) => TravelAndHotelsScreen(),
+              Routes.organizersScreen: (context) => OrganizersScreen(),
+              Routes.ticketsScreen: (context) => TicketsScreen(),
+              Routes.editAccountScreen: (context) => EditAccountScreen(),
             },
             debugShowCheckedModeBanner: false,
             // home: MyHomePage(),

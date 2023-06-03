@@ -1,10 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hexa_project/util/const.dart';
 
-import '../../../components/TextFieldWidget.dart';
-import '../../../components/logo.dart';
-import '../../../util/size_util.dart';
+import '../../../../components/TextFieldWidget.dart';
+import '../../../../components/logo.dart';
+import '../../../../core/resources/manger_color.dart';
+import '../../../../core/resources/manger_fonts.dart';
+import '../../../../core/resources/manger_sizes.dart';
+import '../../../../core/resources/manger_strings.dart';
+import '../../../components/main_button.dart';
+import '../../../route/routes.dart';
 
 class LoginScreen extends StatefulWidget {
   static String id = 'LoginScreen';
@@ -16,6 +20,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isChecked = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,34 +31,30 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: SizeUtil.setHeight(428), //428
+              height: ManagerHeight.h428, //428
               width: double.infinity,
-              color: deepFuchsia,
+              color: ManagerColors.deepFuchsia,
               child: Logo(
-                titleColor: white,
+                titleColor: ManagerColors.white,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(
-                  top: SizeUtil.setHeight(50.0), right: SizeUtil.setWidth(52)),
+                  top: ManagerHeight.h50, right: ManagerWidth.w52),
               child: Text(
-                'تسجيل دخول',
+                ManagerStrings.login,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: SizeUtil.setFontSize(20),
-                    color: deepFuchsia),
+                    fontWeight: ManagerFontWeight.bold,
+                    fontSize: ManagerFontSize.s20,
+                    color: ManagerColors.deepFuchsia),
               ),
             ),
             TextFieldWidget(
-              Icons.person,
-              'البريد الإلكتروني',
-            ),
+                Icons.person, ManagerStrings.email, _emailController),
             TextFieldWidget(
-              Icons.lock,
-              'كلمة المرور',
-            ),
+                Icons.lock, ManagerStrings.password, _passwordController),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: SizeUtil.setWidth(50)),
+              padding: EdgeInsets.symmetric(horizontal: ManagerWidth.w50),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -62,70 +65,67 @@ class _LoginScreenState extends State<LoginScreen> {
                           _isChecked = !_isChecked;
                         });
                       },
-                      activeColor: emeraldGreen),
+                      activeColor: ManagerColors.emeraldGreen),
                   Text(
-                    'تذكرني',
+                    ManagerStrings.rememberMe,
                     textDirection: TextDirection.rtl,
                     style: TextStyle(
-                        fontSize: SizeUtil.setFontSize(20),
-                        fontWeight: FontWeight.bold),
+                        fontSize: ManagerFontSize.s20,
+                        fontWeight: ManagerFontWeight.bold),
                   ),
                 ],
               ),
             ),
             Center(
-              child: ElevatedButton(
-                onPressed: () {},
-                style: buttonStyle,
+              child: MainButton(
+                onPressed: () {
+                  //TODO : Sign in
+                  String email = _emailController.text;
+                  String password = _passwordController.text;
+                },
                 child: Text(
-                  'دخول',
+                  ManagerStrings.entrance,
                   style: TextStyle(
-                      fontSize: SizeUtil.setFontSize(20),
-                      fontWeight: FontWeight.bold),
+                      fontSize: ManagerFontSize.s20,
+                      fontWeight: ManagerFontWeight.bold),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(SizeUtil.setWidth(40)),
+              padding: EdgeInsets.all(ManagerWidth.w40),
               child: TextButton(
                 onPressed: () {
                   showModalBottomSheet(
                       context: context,
                       builder: (context) {
-                        return Container(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsets.all(SizeUtil.setWidth(50.0)),
-                                child: Text(
-                                  'نسيت كلمة المرور ؟ ',
-                                  style: TextStyle(
-                                    fontSize: SizeUtil.setFontSize(25),
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(ManagerWidth.w50),
+                              child: Text(
+                                ManagerStrings.forgetPassword,
+                                style: TextStyle(
+                                  fontSize: ManagerFontSize.s25,
+                                  fontWeight: ManagerFontWeight.bold,
                                 ),
                               ),
-                              TextFieldWidget(
-                                Icons.email,
-                                'البريد الإلكتروني ',
-                              ),
-                              ElevatedButton(
-                                  style: buttonStyle,
-                                  onPressed: () {},
-                                  child: Text('ارسال ')),
-                            ],
-                          ),
+                            ),
+                            TextFieldWidget(Icons.email, ManagerStrings.email,
+                                _emailController),
+                            MainButton(
+                                child: const Text(ManagerStrings.send),
+                                onPressed: () {})
+                          ],
                         );
                       });
                 },
                 child: Center(
                   child: Text(
-                    'نسيت كلمة المرور',
+                    ManagerStrings.forgetPassword,
                     style: TextStyle(
-                        fontSize: SizeUtil.setFontSize(20),
-                        color: silver,
-                        fontWeight: FontWeight.bold),
+                        fontSize: ManagerFontSize.s20,
+                        color: ManagerColors.silver,
+                        fontWeight: ManagerFontWeight.bold),
                   ),
                 ),
               ),
@@ -134,28 +134,29 @@ class _LoginScreenState extends State<LoginScreen> {
               child: RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                      text: 'ليس لديك حساب ؟',
+                      text: ManagerStrings.notHaveAccount,
                       style: TextStyle(
-                        color: silver,
-                        fontSize: SizeUtil.setFontSize(20),
+                        color: ManagerColors.silver,
+                        fontSize: ManagerFontSize.s20,
                       )),
                   TextSpan(
-                    text: ' انشاء حساب ',
+                    text: ManagerStrings.createAccount,
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: black,
-                      fontSize: SizeUtil.setFontSize(20),
+                      fontWeight: ManagerFontWeight.bold,
+                      color: ManagerColors.black,
+                      fontSize: ManagerFontSize.s20,
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Navigator.pushNamed(context, '/account_type_screen');
+                        //TODO :Edite navigator
+                        Navigator.pushNamed(context, Routes.accountTypeScreen);
                       },
                   ),
                 ]),
               ),
             ),
             SizedBox(
-              height: SizeUtil.setHeight(40),
+              height: ManagerHeight.h40,
             ),
           ],
         ),

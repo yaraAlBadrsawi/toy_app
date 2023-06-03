@@ -112,23 +112,25 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 'راسلنا',
                 style: TextStyle(fontSize: 20, color: purple),
               ),
-              TextFieldWidget(Icons.person, 'الاسم'),
-              TextFieldWidget(Icons.email, 'البريد الإلكتروني'),
-              TextFieldWidget(Icons.phone, 'رقم الجوال'),
+              TextFieldWidget(Icons.person, 'الاسم', TextEditingController()),
+              TextFieldWidget(
+                  Icons.email, 'البريد الإلكتروني', TextEditingController()),
+              TextFieldWidget(
+                  Icons.phone, 'رقم الجوال', TextEditingController()),
               TextFieldWidget(
                 Icons.location_on,
                 'الدولة',
+                TextEditingController(),
                 suffixIcon: Icons.keyboard_arrow_down,
               ),
-              TextFieldWidget(Icons.email, 'عنوان الرسالة'),
+              TextFieldWidget(
+                  Icons.email, 'عنوان الرسالة', TextEditingController()),
               Column(
                 children: [
                   Container(
                     height: 200,
-                    child: TextFieldWidget(
-                      Icons.email,
-                      'اكتب رسالتك هنا',
-                    ),
+                    child: TextFieldWidget(Icons.email, 'اكتب رسالتك هنا',
+                        TextEditingController()),
                   ),
                   Container(
                     height: 200,

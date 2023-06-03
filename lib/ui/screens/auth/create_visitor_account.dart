@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../../components/TextFieldWidget.dart';
-import '../../../util/const.dart';
-import '../../../util/size_util.dart';
+import '../../../../../components/TextFieldWidget.dart';
+import '../../../../../components/title_bar.dart';
+import '../../../../../core/resources/manger_color.dart';
+import '../../../../../core/resources/manger_fonts.dart';
+import '../../../../../core/resources/manger_sizes.dart';
+import '../../../../../core/resources/manger_strings.dart';
+import '../../../components/main_button.dart';
+import '../../../components/snack_bar.dart';
+import '../../../core/base_model/user.dart';
+import '../../../core/network/auth_controller.dart';
+import '../../../core/validation.dart';
 
 class VisitorRegister extends StatefulWidget {
   const VisitorRegister({Key? key}) : super(key: key);
@@ -11,126 +19,139 @@ class VisitorRegister extends StatefulWidget {
 }
 
 class _VisitorRegisterState extends State<VisitorRegister> {
-  String _selectedItem = 'نص 1';
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _mobileController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _repeatPasswordController =
+      TextEditingController();
+  List<String> country = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+
+  // dispose it when the widget is unmounted
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _mobileController.dispose();
+    _passwordController.dispose();
+    // _repeatPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: ManagerColors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
             TitleBar(
-              title: 'إنشاء حساب زائر',
+              title: ManagerStrings.createVisitorAccount,
               icon: Icons.person,
             ),
             TextFieldWidget(
               Icons.person,
-              'الاسم',
+              ManagerStrings.name,
+              _nameController,
             ),
             TextFieldWidget(
               Icons.email,
-              'البريد الإلكتروني',
+              ManagerStrings.email,
+              _emailController,
             ),
             TextFieldWidget(
               Icons.phone,
-              'رقم الجوال',
+              ManagerStrings.phoneNumber,
+              _mobileController,
             ),
             Container(
-              width: 300,
+              width: ManagerWidth.w300,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(ManagerRadius.r10),
                 border: Border.all(
-                  color: lightSmoke,
+                  color: ManagerColors.lightSmoke,
                   width: 1,
                 ),
               ),
             ),
-            TextFieldWidget(Icons.location_on_sharp, 'الدولة',
+            TextFieldWidget(Icons.location_on_sharp, ManagerStrings.country,
+                TextEditingController(),
                 suffixIcon: Icons.keyboard_arrow_down),
             TextFieldWidget(
               Icons.lock,
-              'كلمة المرور',
+              ManagerStrings.password,
+              _passwordController,
+              errorText: Validation.validatePassword(_passwordController),
             ),
             TextFieldWidget(
               Icons.lock,
-              'إعادة كلمة المرور',
+              ManagerStrings.repeatPassword,
+              _repeatPasswordController,
+              errorText: Validation.validateRepeatPassword(
+                  _passwordController, _repeatPasswordController),
             ),
             SizedBox(
-              height: 40,
+              height: ManagerHeight.h40,
             ),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: purple,
-                  padding: EdgeInsets.symmetric(horizontal: 76, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {},
+            MainButton(
                 child: Text(
-                  'تسجيل',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                )),
+                  ManagerStrings.register,
+                  style: TextStyle(
+                      fontSize: ManagerFontSize.s20,
+                      fontWeight: ManagerFontWeight.bold),
+                ),
+                onPressed: () {
+                  _performRegister();
+                }),
             SizedBox(
-              height: 30,
+              height: ManagerHeight.h30,
             ),
           ],
         ),
       ),
     );
   }
-}
 
-class TitleBar extends StatelessWidget {
-  String title;
-  IconData icon;
+  Future<void> _performRegister() async {
+    if (!_checkData()) {
+      SnackBarUtils.showSnackBar(context, ManagerStrings.dataCantBeEmpty);
+      // ));
+    } else if (!Validation.validateEmail(_emailController.text)) {
+      SnackBarUtils.showSnackBar(context, ManagerStrings.invalidEmail);
+    } else if (Validation.validatePassword(_passwordController) != null) {
+      if (Validation.validatePassword(_passwordController) ==
+          ManagerStrings.shortPassword) {
+        SnackBarUtils.showSnackBar(context, ManagerStrings.shortPassword);
+      } else if (_passwordController.text != _repeatPasswordController.text) {
+        SnackBarUtils.showSnackBar(context, ManagerStrings.mismatchedPassword);
+      } else {}
+    } else {
+      // in else the only true case i want
+      await AuthController.singUp(context, user);
+    }
+  }
 
-  TitleBar({
-    required this.title,
-    required this.icon,
-    super.key,
-  });
+  bool _checkData() {
+    if (_nameController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty &&
+        _repeatPasswordController.text.isNotEmpty &&
+        _mobileController.text.isNotEmpty) {
+      return true;
+    }
+    print('empty dats: ${_nameController.text},,,${_passwordController.text}');
+    return false;
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 295,
-      width: double.infinity,
-      color: deepFuchsia,
-      margin: EdgeInsets.only(bottom: 50),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: EdgeInsets.all(30),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: deepFuchsia,
-              border: Border.all(
-                color: Colors.white, // Color of the outline
-                width: 1.0, // Width of the outline
-              ),
-            ),
-            child: Icon(
-              icon,
-              color: white,
-              size: 40,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: white,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  User get user {
+    User user = User();
+    user.email = _emailController.text;
+    user.password = _passwordController.text;
+    user.repeatPassword = _passwordController.text;
+    user.name = _nameController.text;
+    user.mobile = _mobileController.text;
+    user.country = '13';
+    user.typeMobile = 'android';
+    user.userType = '3';
+    return user;
   }
 }

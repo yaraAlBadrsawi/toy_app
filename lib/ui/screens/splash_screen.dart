@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:hexa_project/service/api_service.dart';
+import 'package:hexa_project/core/network/api_service.dart';
 import '../../components/logo.dart';
 import '../../util/const.dart';
 import 'package:http/http.dart' as http;
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // connected with api
     ApiService.fetchData();
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/login_screen'); //login_screen
+      Navigator.pushReplacementNamed(context, '/home_screen'); //login_screen
     });
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexa_project/components/social_icon.dart';
+import 'package:hexa_project/route/routes.dart';
 import '../util/const.dart';
 import 'drawer_item.dart';
 import 'logo.dart';
@@ -15,7 +16,7 @@ class HomeDrawer extends StatelessWidget {
     return Drawer(
         backgroundColor: deepFuchsia,
         child: Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: TextDirection.ltr,
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
@@ -38,47 +39,65 @@ class HomeDrawer extends StatelessWidget {
                     iconData: Icons.person,
                     color: byzantine,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.loginScreen);
+                    },
                   ),
                   DrawerItem(
                     text: 'الرئيسية',
                     iconData: Icons.home,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.homeScreen);
+                    },
                   ),
                   DrawerItem(
                     text: 'العارضين',
                     iconData: FontAwesomeIcons.store,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.exhibitorsScreen);
+                    },
                   ),
                   DrawerItem(
                     text: 'الرعاة',
                     iconData: FontAwesomeIcons.medal,
-                    onTap: () {},
+                    onTap: () {
+                      // Navigator.pushNamed(context, Routes.);
+                    },
                   ),
                   DrawerItem(
                     text: 'التذاكر',
                     iconData: FontAwesomeIcons.ticket,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.ticketsScreen);
+                    },
                   ),
                   DrawerItem(
                     text: 'السفر والفنادق',
                     iconData: Icons.airplanemode_active,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.travelAndHotelScreen);
+                    },
                   ),
                   DrawerItem(
                     text: 'المدونة',
                     iconData: FontAwesomeIcons.blog,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.blogsScreen);
+                    },
                   ),
                   DrawerItem(
                     text: 'من نحن',
                     iconData: Icons.info,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.whoAreWeScreen);
+                    },
                   ),
                   DrawerItem(
                     text: 'الأسئلة الشائعة',
                     iconData: FontAwesomeIcons.circleQuestion,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.commonQuestionScreen);
+                    },
                   ),
                   DrawerItem(
                     text: 'English',
@@ -88,7 +107,9 @@ class HomeDrawer extends StatelessWidget {
                   DrawerItem(
                     text: 'اتصل بنا',
                     iconData: Icons.email,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.contactUScreen);
+                    },
                   ),
                 ],
               ),

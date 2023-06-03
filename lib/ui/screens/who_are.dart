@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexa_project/components/app_bar.dart';
 
 import '../../util/const.dart';
 
@@ -13,18 +14,7 @@ class _WhoAreWeScreenState extends State<WhoAreWeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: deepFuchsia,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(
-              'من نحن',
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
-        ),
-      ),
+      appBar: const AppBarWidget(title: 'من نحن'),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [

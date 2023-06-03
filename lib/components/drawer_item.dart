@@ -25,17 +25,17 @@ class DrawerItem extends StatelessWidget {
         title: Row(
           mainAxisAlignment: mainAxisAlignment,
           children: [
-            Icon(
-              iconData,
-              color: white,
-              size: 16,
+            Text(
+              text,
+              style: TextStyle(color: white, fontSize: 18),
             ),
             const SizedBox(
               width: 6,
             ),
-            Text(
-              text,
-              style: TextStyle(color: white, fontSize: 18),
+            Icon(
+              iconData,
+              color: white,
+              size: 16,
             ),
           ],
         ),

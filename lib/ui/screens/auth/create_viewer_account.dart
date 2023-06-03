@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../components/TextFieldWidget.dart';
-import '../../../components/title_bar.dart';
-import '../../../util/const.dart';
-import '../../../util/size_util.dart';
+import '../../../../../components/TextFieldWidget.dart';
+import '../../../../../components/title_bar.dart';
+import '../../../../../core/resources/manger_color.dart';
+import '../../../../../core/resources/manger_fonts.dart';
+import '../../../../../core/resources/manger_sizes.dart';
+import '../../../../../core/resources/manger_strings.dart';
 
 class ViewerRegister extends StatefulWidget {
   const ViewerRegister({Key? key}) : super(key: key);
@@ -16,75 +18,89 @@ class _ViewerRegisterState extends State<ViewerRegister> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: ManagerColors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
             TitleBar(
-              title: 'إنشاء حساب عارض',
+              title: ManagerStrings.viewerAccount,
               icon: FontAwesomeIcons.store,
             ),
             TextFieldWidget(
               Icons.person,
-              'الاسم',
+              ManagerStrings.name,
+              TextEditingController(),
             ),
             TextFieldWidget(
               Icons.email,
-              'البريد الإلكتروني',
+              ManagerStrings.email,
+              TextEditingController(),
             ),
             TextFieldWidget(
               Icons.phone,
-              'رقم الجوال',
+              ManagerStrings.phoneNumber,
+              TextEditingController(),
             ),
             TextFieldWidget(
               Icons.location_city,
-              'اسم الشركة',
+              ManagerStrings.companyName,
+              TextEditingController(),
             ),
-            TextFieldWidget(Icons.location_on_sharp, 'الدولة',
+            TextFieldWidget(Icons.location_on_sharp, ManagerStrings.country,
+                TextEditingController(),
                 suffixIcon: Icons.keyboard_arrow_down
                 // Icons.keyboard_arrow_down_sharp,
                 ),
             TextFieldWidget(
               FontAwesomeIcons.newspaper,
-              'شعار الشركة',
-              show: 'استعراض',
+              ManagerStrings.companyLogo,
+              TextEditingController(),
+              show: ManagerStrings.review,
             ),
             TextFieldWidget(
               FontAwesomeIcons.newspaper,
-              'ملفات الشركة التعريفية',
-              show: 'استعراض',
+              ManagerStrings.companyProfile,
+              TextEditingController(),
+              show: ' ',
             ),
             TextFieldWidget(
               FontAwesomeIcons.newspaper,
-              'ملفات الشركة الرسمية',
-              show: 'استعراض',
+              ManagerStrings.officialCompanyFiles,
+              show: ' ',
+              TextEditingController(),
             ),
             TextFieldWidget(
               Icons.lock,
-              'كلمة المرور',
+              ManagerStrings.password,
+              TextEditingController(),
             ),
             TextFieldWidget(
               Icons.lock,
-              'إعادة كلمة المرور',
+              ManagerStrings.repeatPassword,
+              TextEditingController(),
             ),
             SizedBox(
-              height: 40,
+              height: ManagerHeight.h40,
             ),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: purple,
-                  padding: EdgeInsets.symmetric(horizontal: 76, vertical: 15),
+                  backgroundColor: ManagerColors.purple,
+                  padding: EdgeInsets.symmetric(
+                      horizontal: ManagerWidth.w76,
+                      vertical: ManagerHeight.h15),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(ManagerRadius.r10),
                   ),
                 ),
                 onPressed: () {},
                 child: Text(
-                  'تسجيل',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ManagerStrings.register,
+                  style: TextStyle(
+                      fontSize: ManagerFontSize.s20,
+                      fontWeight: ManagerFontWeight.bold),
                 )),
             SizedBox(
-              height: 30,
+              height: ManagerHeight.h30,
             ),
           ],
         ),
